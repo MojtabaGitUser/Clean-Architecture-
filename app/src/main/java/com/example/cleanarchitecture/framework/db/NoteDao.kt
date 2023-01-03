@@ -1,18 +1,14 @@
 package com.example.cleanarchitecture.framework.db
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Query
-
-/*
+import androidx.room.*
+@Dao //it will allow the system to know that this is a Dao
+interface NoteDao {
+    /*
 Data Access Object or the Dao. The Dao is basically an interface that defines the functionality
 that we will be able to perform on our database.
 */
-@Dao //it will allow the system to know that this is a Dao
-interface NoteDao {
-    @Insert(onConflict = REPLACE) //it says if we already have that note in our database, then we will replace the new one
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE) //it says if we already have that note in our database, then we will replace the new one
     suspend fun addNoteEntity(noteEntity: NoteEntity)/*The reason why we have a suspend is because we will be
     calling this function from a cool routine. to solve the update problem*/
 
